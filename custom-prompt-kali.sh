@@ -30,7 +30,7 @@ SYMBOL_RED_SQUARE="🟥"
 SYMBOL_RED_CIRCLE="🔴"
 
 
-if [ "$EUID" -ne 0 ]
+if [ "$EUID" -eq 0 ]
 then
     USER="\[$(tput bold)\]${IRED}\u"
     if [ $TERM == "xterm-256color" ] || [ $TERM == "xterm" ]; then AT_SYMBOL="${SYMBOL_SKULL_SMALL} "; else AT_SYMBOL="@"; fi
