@@ -15,7 +15,7 @@ IBLUE="\[\033[38;5;12m\]"
 BLUE="\[\033[38;5;33m\]"
 SYMBOL_DOLLAR="$"
 SYMBOL_AT="㉿"
-SYMBOL_GT="➤" #"›"
+SYMBOL_GT="›"
 DATE=$(date "+%d/%m/%Y")
 
 SYMBOL_PATH_SEPARATOR=" :: "
@@ -30,15 +30,16 @@ SYMBOL_RED_SQUARE="🟥"
 SYMBOL_RED_CIRCLE="🔴"
 
 
-USER="${BOLD}${IRED}\u"
-if [ $TERM == "xterm-256color" ] || [ $TERM == "tmux-256color" ] || [ $TERM == "xterm" ]; then AT_SYMBOL="${SYMBOL_NO_ENTRY}"; else AT_SYMBOL="@"; fi
-HOST="\h${NORMAL}"
+USER="\[$(tput bold)\]${IRED}\u"
+AT_SYMBOL="${SYMBOL_NO_ENTRY}"
+HOST="\h\[$(tput sgr0)\]"
 USER_AT_HOST="${USER}${AT_SYMBOL}${HOST}"
-PROMPT_SYMBOL="${BOLD}#${NORMAL}"
+PROMPT_SYMBOL="\[$(tput bold)\]"'#'"\[$(tput sgr0)\]"
 
 
-PS1_l1="\n【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"${NORMAL} 】-【 ${USER_AT_HOST} 】\n"
-PS1_l2="${ICYAN}┌── ${NORMAL}〘${ICYAN} ${BOLD}\w${NORMAL} 〙\n"
-PS1_l3="${ICYAN}└─›${NORMAL}  ${PROMPT_SYMBOL} "
+PS1_l1="\n【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] 】-【 ${USER_AT_HOST} 】\n"
+PS1_l2="${ICYAN}┌── \[$(tput sgr0)\]〘${ICYAN} \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
+PS1_l3="${ICYAN}└─›\[$(tput sgr0)\]  ${PROMPT_SYMBOL} "
+
 unset PS1
 export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
