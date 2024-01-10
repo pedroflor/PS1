@@ -13,6 +13,8 @@ IRED="\[\033[38;5;9m\]"
 RED="\[\033[38;5;1m\]"
 IBLUE="\[\033[38;5;12m\]"
 BLUE="\[\033[38;5;33m\]"
+ORANGE="\[\e[38;5;214m\]"
+PINK="\[\e[38;5;199m\]"
 SYMBOL_DOLLAR="$"
 SYMBOL_AT="㉿"
 SYMBOL_GT="➤" #"›"
@@ -39,8 +41,8 @@ then
     PROMPT_SYMBOL="\[$(tput bold)\]"'#'"\[$(tput sgr0)\]"
 else
     USER="${IGREEN}\u"
-    if [ $TERM == "xterm-256color" ] || [ $TERM == "xterm" ]; then AT_SYMBOL="${SYMBOL_AT}"; else AT_SYMBOL="@"; fi
-    
+    if [ $TERM == "xterm-256color" ] || [ $TERM == "xterm" ]; then AT_SYMBOL="${SYMBOL_LIGHTNING}"; else AT_SYMBOL="@"; fi
+
     HOST="${IGREEN}\h\[$(tput sgr0)\]"
     USER_AT_HOST="${USER}${AT_SYMBOL}${HOST}"
     PROMPT_SYMBOL="\[$(tput bold)\]"'$'"\[$(tput sgr0)\]"
@@ -49,15 +51,15 @@ fi
 
 if [ $TERM == "xterm-256color" ] || [ $TERM == "xterm" ]
 then
-    PS1_l1="\n【 ${IBLUE}"'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] 】-【 ${USER_AT_HOST} 】\n"
-    PS1_l2='┌──'" 〘 \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
-    PS1_l3="└─› ${PROMPT_SYMBOL} "
+    PS1_l1="\n【 ${GREEN}"'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] 】-【 ${USER_AT_HOST} 】\n"
+    PS1_l2=${ICYAN}"┌── 〘 ${IWHITE}\w${ICYAN} 〙\[$(tput sgr0)\] \n"
+    PS1_l3=${ICYAN}"└─› \[$(tput sgr0)\]${PROMPT_SYMBOL} "
     unset PS1
     export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
 else
-    PS1_l1="[ ${IBLUE}"'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] ] - [ ${USER_AT_HOST} ]\n"
-    PS1_l2="┌──"" [ \[$(tput bold)\]\w\[$(tput sgr0)\] ]\n"
-    PS1_l3="└─> ${PROMPT_SYMBOL} "
+    PS1_l1="\n[ ${GREEN}"'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] ] - [ ${USER_AT_HOST} ]\n"
+    PS1_l2=${ICYAN}"┌── [ ${IWHITE}\w${ICYAN}]\[$(tput sgr0)\] \n"
+    PS1_l3=${ICYAN}"└─> \[$(tput sgr0)\]${PROMPT_SYMBOL} "
     unset PS1
-    PS1=${PS1_l1}${PS1_l2}${PS1_l3}
+    export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
 fi
