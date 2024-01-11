@@ -1,5 +1,5 @@
 #########################################################
-###############    CUSTOM PROMPT EXEGOL #################
+#################    CUSTOM PROMPT EXEGOL #################
 #########################################################
 
 #BOLD   => "\[$(tput bold)\]"
@@ -57,21 +57,14 @@ PATH_COLOR="${IGREEN}"
 
 # Esquina derecha superior
 
-# CYAN
-BANNER="\e[1;46m« E X E G O L »\e[0m"
-# BLUE
-BANNER="\e[1;44m« E X E G O L »\e[0m"
-PS1_l0a="\$(tput sc)\[\033[1;\$(echo -n \$((\$COLUMNS-14)))H\]${BANNER}\$(tput rc)"
-
-
-PS1_l0="\n${PURPLE}           _.ooO--« ( E X E G O L ) »--Ooo._\n"
-PS1_l0c="${PURPLE}
-                 ╔═╗═╗ ╦╔═╗╔═╗╔═╗╦
-                 ║╣ ╔╩╦╝║╣ ║ ╦║ ║║
-                 ╚═╝╩ ╚═╚═╝╚═╝╚═╝╩═╝
-\[${IWHITE}"
-PS1_l1="\n${IWHITE}【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[${IWHITE} 】-【 ${IBLUE}${USERNAME_AT_HOSTNAME} 】\n"
+#BANNER_BG_EXEGOL="\e[1;46m« E X E G O L »\e[0m" # CYAN BACKGROUND
+#BANNER_BG_EXEGOL="\e[1;44m« E X E G O L »\e[0m" # BLUEN BACKGROUND
+BANNER_BG_EXEGOL="E X E G O L"
+#BANNER_BG_EXEGOL="\$(tput sc)\[\033[1;\$(echo -n \$((\$COLUMNS-14)))H\]${BANNER}\$(tput rc)"
+#BANNER_BG_EXEGOL="\n${PURPLE}  _.ooO--« ( E X E G O L ) »--Ooo._\n"
+#BANNER_BG_EXEGOL="${PURPLE}                ╔═╗═╗ ╦╔═╗╔═╗╔═╗╦\n                ║╣ ╔╩╦╝║╣ ║ ╦║ ║║\n                ╚═╝╩ ╚═╚═╝╚═╝╚═╝╩═╝\n \[${IWHITE}"
+PS1_l1="\n${IWHITE}【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[${IWHITE} 】-【 ${IBLUE}${USERNAME_AT_HOSTNAME} ${IWHITE}】::【${PURPLE} ${BANNER_BG_EXEGOL} ${IWHITE}】\n"
 PS1_l2="${ARROW_COLOR}┌── \[$(tput sgr0)\]〘${PATH_COLOR} \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
 PS1_l3="${ARROW_COLOR}└─›\[$(tput sgr0)\]  ${PROMPT_SYMBOL} "
 unset PS1
-export PS1=${PS1_l0}${PS1_l1}${PS1_l2}${PS1_l3}
+export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
