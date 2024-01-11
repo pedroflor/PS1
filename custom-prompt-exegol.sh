@@ -1,5 +1,5 @@
 #########################################################
-#################    CUSTOM PROMPT EXEGOL #################
+###############    CUSTOM PROMPT EXEGOL #################
 #########################################################
 
 #BOLD   => "\[$(tput bold)\]"
@@ -32,14 +32,14 @@ SYMBOL_LAPTOP="💻"
 SYMBOL_NO_ENTRY="⛔"
 SYMBOL_RED_SQUARE="🟥"
 SYMBOL_RED_CIRCLE="🔴"
- 
- 
+
+
 # Parametrizar colores
 USER_ROOT_AND_HOSTNAME_COLOR=${IRED}
 USER_NORMAL_AND_HOSTNAME_COLOR=${IGREEN}
 AT_ROOT_SYMBOL="☠️"
 AT_NORMAL_SYMBOL="㉿"
- 
+
 # USERNAME "root"
 USERNAME="\[$(tput bold)\]${USER_ROOT_AND_HOSTNAME_COLOR}\u\[$(tput sgr0)\]"
 # "AT" symbol
@@ -50,16 +50,25 @@ HOSTNAME="\[$(tput bold)\]${USER_ROOT_AND_HOSTNAME_COLOR}\h\[$(tput sgr0)\]"
 USERNAME_AT_HOSTNAME="${USERNAME}${AT_SYMBOL}${HOSTNAME}"
 # Prompt symbol
 PROMPT_SYMBOL="\[$(tput bold)\]"'#'"\[$(tput sgr0)\]"
- 
- 
+
+
 ARROW_COLOR="${CYAN}"
 PATH_COLOR="${IGREEN}"
- 
+
+# Esquina derecha superior
+
+# CYAN
+BANNER="\e[1;46m« E X E G O L »\e[0m"
+# BLUE
+BANNER="\e[1;44m« E X E G O L »\e[0m"
+PS1_l0a="\$(tput sc)\[\033[1;\$(echo -n \$((\$COLUMNS-14)))H\]${BANNER}\$(tput rc)"
+
+
 PS1_l0="\n${PURPLE}           _.ooO--« ( E X E G O L ) »--Ooo._\n"
-PS1_l0b="${PURPLE}
-                ╔═╗═╗ ╦╔═╗╔═╗╔═╗╦
-                ║╣ ╔╩╦╝║╣ ║ ╦║ ║║
-                ╚═╝╩ ╚═╚═╝╚═╝╚═╝╩═╝
+PS1_l0c="${PURPLE}
+                 ╔═╗═╗ ╦╔═╗╔═╗╔═╗╦
+                 ║╣ ╔╩╦╝║╣ ║ ╦║ ║║
+                 ╚═╝╩ ╚═╚═╝╚═╝╚═╝╩═╝
 \[${IWHITE}"
 PS1_l1="\n${IWHITE}【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[${IWHITE} 】-【 ${IBLUE}${USERNAME_AT_HOSTNAME} 】\n"
 PS1_l2="${ARROW_COLOR}┌── \[$(tput sgr0)\]〘${PATH_COLOR} \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
