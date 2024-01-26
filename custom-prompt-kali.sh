@@ -4,17 +4,19 @@
 
 #BOLD   => "\[$(tput bold)\]"
 #NORMAL => "\[$(tput sgr0)\]"
-CYAN="\[\033[38;5;6m\]"
-ICYAN="\[\033[38;5;14m\]"
-IWHITE="\[\033[38;5;15m\]"
-GREEN="\[\033[38;5;2m\]"
-IGREEN="\[\033[38;5;10m\]"
-RED="\[\033[38;5;1m\]"
-IRED="\[\033[38;5;9m\]"
-BLUE="\[\033[38;5;33m\]"
-IBLUE="\[\033[38;5;12m\]"
+CYAN="\[\e[38;5;6m\]"
+ICYAN="\[\e[38;5;14m\]"
+WHITE="\[\e[38;5;7m\]"
+IWHITE="\[\e[38;5;15m\]"
+GREEN="\[\e[38;5;2m\]"
+IGREEN="\[\e[38;5;10m\]"
+RED="\[\e[38;5;1m\]"
+IRED="\[\e[38;5;9m\]"
+BLUE="\[\e[38;5;4m\]"
+IBLUE="\[\e[38;5;12m\]"
 ORANGE="\[\e[38;5;214m\]"
-PINK="\[\e[38;5;199m\]"
+PINK="\[\e[38;5;5m\]"
+IPINK="\[\e[38;5;13m\]"
 PURPLE="\[\e[38;5;93m\]"
 
 SYMBOL_DOLLAR="$"
@@ -40,8 +42,12 @@ USER_NORMAL_AND_HOSTNAME_COLOR=${GREEN}
 AT_ROOT_SYMBOL="☠️"
 AT_NORMAL_SYMBOL="㉿"
 
+
+## Unset previous PS1
+#unset PS1
+
 ## USERNAME, HOSTNAME, PROMPT-SYMBOL
-if [ "$EUID" -eq 0 ]
+if [[ "$EUID" -eq 0 ]]
 then
     # USERNAME "root"
     USERNAME="\[$(tput bold)\]${USER_ROOT_AND_HOSTNAME_COLOR}\u\[$(tput sgr0)\]"
@@ -69,23 +75,31 @@ fi
 
 ARROW_COLOR="${CYAN}"
 PATH_COLOR="${IWHITE}"
-alias ANIMATION=animation_b
 
 # date-time, path
 if [ $TERM == "xterm-256color" ] || [ $TERM == "xterm" ]
 then
     PS1_l1="\n${IWHITE}【${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[${IWHITE} 】-【 ${IBLUE}${USERNAME_AT_HOSTNAME} 】\n"
-    # Bold
-    #PS1_l2="${ARROW_COLOR}┌── \[$(tput sgr0)\]〘${PATH_COLOR} \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
-    # Regular
     PS1_l2="${ARROW_COLOR}┌── \[$(tput sgr0)\]〘${PATH_COLOR} \w\[$(tput sgr0)\] 〙\n"
     PS1_l3="${ARROW_COLOR}└─›\[$(tput sgr0)\]  ${PROMPT_SYMBOL} "
-    unset PS1
-    export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
+    PS2=${PS1}
+    PS1="${PS1_l1}${PS1_l2}${PS1_l3}"
 else
     PS1_l1="\n[${BLUE} "'$(date "+%H:%M:%S - %d/%m/%Y")'"\[$(tput sgr0)\] ] - [ ${USERNAME_AT_HOSTNAME} ]\n"
     PS1_l2="${ARROW_COLOR}┌── \[$(tput sgr0)\]〘${PATH_COLOR} \[$(tput bold)\]\w\[$(tput sgr0)\] 〙\n"
     PS1_l3="${ARROW_COLOR}└─>\[$(tput sgr0)\]  ${PROMPT_SYMBOL} "
-    unset PS1
-    export PS1=${PS1_l1}${PS1_l2}${PS1_l3}
+    PS1=${PS1_l1}${PS1_l2}${PS1_l3}
 fi
+export PS1
+
+# pwd only
+#PROMPT_COMMAND='echo -en "\033]0; $("pwd") \a"'
+
+## Regular
+#PROMPT_COMMAND='echo -en "\033]0; [ $("logname")㉿$("hostname") ] :: [ $("pwd") ] \a"'
+
+## Fancy
+#PROMPT_COMMAND='echo -en "\033]0; 【 $("logname")㉿$("hostname") 】 :: 【 $("pwd") 】 \a"'
+
+## ZEN (Clean Window Title & Title Bar)
+PROMPT_COMMAND='echo -en "\033]0; \a"'
